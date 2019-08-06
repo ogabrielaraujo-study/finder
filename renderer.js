@@ -29,14 +29,26 @@ function getItems() {
 		$('#root').html('');
 
 		items.forEach(file => {
-			//console.log(file);
+			// error permissions
+			if (file === 'Config.Msi' || file.split('.')[1] === 'sys' || file === 'System Volume Information' || file === '$Recycle.Bin' || file === 'Recovery' || file === 'WindowsApps') {
+				return;
+			}
+
+			// dont show folder
+			if (directoryPath === 'C:/' && (file === 'Windows' || file === 'Arquivos de Programas' || file === 'PerfLogs') || file === 'Documents and Settings') {
+				return;
+			}
+
 			if (fs.statSync(folder + '/' + file).isDirectory()) {
 				// dir
-				//$('#root').append('<a href="#" onclick="getItems(\''+ folder + '/' + file +'\')">' + file + '</a><br>');
-				$('#root').append('<a href="#" onclick="$(\'#folder\').val(\''+ folder + '/' + file +'\'); getItems()">' + file + '</a><br>');
+				if (folder === 'C:/') {
+					$('#root').append('<a href="#" class="folder" onclick="$(\'#folder\').val(\''+ folder + file +'\'); getItems()">' + file + '</a>');
+				} else {
+					$('#root').append('<a href="#" class="folder" onclick="$(\'#folder\').val(\''+ folder + '/' + file +'\'); getItems()">' + file + '</a>');
+				}
 			} else {
 				// open file
-				$('#root').append('<a href="#" onclick="openFile(\''+ folder + '/' + file +'\')">' + file + '</a><br>');
+				$('#root').append('<a href="#" onclick="openFile(\''+ folder + '/' + file +'\')">' + file + '</a>');
 			}
 		});
 	});
@@ -48,8 +60,6 @@ $('#folder').val( __dirname.split('\\').join('/') );
 getItems();
 
 function openFile(file) {
-	console.log(file);
-	//shell.openItem(file);
 	var folder = __dirname.split('\\').join('/');
 	shell.openItem(file)
 	return;
@@ -58,6 +68,7 @@ function openFile(file) {
 function goBack() {
 	var folder = $('#folder').val().split('/');
 	folder.pop();
+
 	if (folder.length <= 1) {
 		$('#folder').val( folder + '/' );
 	} else {
