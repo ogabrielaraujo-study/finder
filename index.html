@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Finder</title>
+	<style>
+		body {
+			font-family: Roboto, sans-serif;
+		}
+	</style>
+</head>
+<body>
+	<h1 style="text-align: center">Finder</h1>
+
+	<button onclick="goBack()">Voltar</button>
+	<div id="current"></div>
+
+	<b>Arquivos:</b>
+	<div id="root"></div>
+
+	<input type="hidden" id="folder" name="folder" value=".">
+
+	<script src="./renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+root = true
+[*]
+end_of_line = crlf
+insert_final_newline = false
+
+[*.html]
+charset = utf-8
+indent_style = tab
+indent_size = 4
+
+# js files
+[*.js]
+charset = utf-8
+indent_style = tab
+indent_size = 4
+
+# php files
+[*.php]
+charset = utf-8
+indent_style = tab
+indent_size = 4
+
+# package.json
+[{package.json,.travis.yml}]
+indent_style = space
+indent_size = 2
