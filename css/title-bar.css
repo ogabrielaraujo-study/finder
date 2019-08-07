@@ -1,0 +1,115 @@
+*, *:before, *:after {
+	box-sizing: border-box;
+	outline: none;
+	margin: 0;
+	padding: 0;
+	font-family: 'Lucida Grande';
+	-webkit-font-smoothing: antialiased;
+}
+
+@font-face {
+	font-family: 'Lucida Grande';
+	src: url(../font/LucidaGrande.ttf);
+}
+
+body {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#title-bar {
+	-webkit-app-region: drag;
+	margin: 0;
+	display: flex;
+	width: 100%;
+  height: 50px;
+  z-index: 9999;
+}
+
+.menu-button-container {
+	display: flex;
+	align-items: center;
+	flex-grow: 1;
+}
+
+.app-name-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-grow: 1;
+}
+
+.window-controls-container {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	flex-grow: 1;
+}
+
+.menu-button {
+	-webkit-app-region: no-drag;
+	background: transparent url('../menu/dots.svg') no-repeat;
+	background-size: 20px 20px;
+	border: none;
+	margin-left: 20px;
+	margin-right: 5px;
+	width: 20px;
+	height: 20px;
+}
+
+.menu-button:hover {
+	/* background-color: grey; */
+}
+
+.minimize-button {
+	-webkit-app-region: no-drag;
+	cursor: pointer;
+	background-color: #00CF1D;
+	padding: 0;
+	margin-left: 5px;
+	margin-right: 5px;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	border: 1px solid #00BC28;
+}
+
+.minimize-button:hover {
+	background-color: #00BC28;
+}
+
+.min-max-button {
+	-webkit-app-region: no-drag;
+	cursor: pointer;
+	background-color: #FFBC00;
+	margin-left: 5px;
+	margin-right: 5px;
+	padding: 0;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	border: 1px solid #FDA700;
+}
+
+.min-max-button:hover {
+	background-color: #FDA700;
+}
+
+.close-button {
+	-webkit-app-region: no-drag;
+	cursor: pointer;
+	background-color: #FF534F;
+	margin-left: 5px;
+	margin-right: 20px;
+	padding: 0;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	border: 1px solid #FF292C;
+}
+
+.close-button:hover {
+	background-color: #FF292C;
+}
+

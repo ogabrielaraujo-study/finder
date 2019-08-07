@@ -1,18 +1,42 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// All of the Node.js APIs are available in this process.
-
-const customTitlebar = require('custom-electron-titlebar');
+const { remote, ipcRenderer } = require('electron')
 const path = require('path')
 const fs = require('fs')
 const {shell} = require('electron')
 var $ = require('jQuery')
 
-new customTitlebar.Titlebar({
-	backgroundColor: customTitlebar.Color.fromHex('#1C1C1C'),
+//const customTitlebar = require('custom-electron-titlebar')
+/* new customTitlebar.Titlebar({
+	backgroundColor: customTitlebar.Color.fromHex('#fff'),
 	icon: './images/icon.svg',
-	shadow: false
-});
+	shadow: false,
+	titleHorizontalAlignment: 'left',
+	menu: false
+}); */
+
+// title bar
+document.getElementById('menu-button').addEventListener('click', (event) => {
+  ipcRenderer.send('display-app-menu', {
+    x: event.x,
+    y: event.y
+  })
+})
+
+document.getElementById('minimize-button').addEventListener('click', () => {
+  remote.getCurrentWindow().minimize()
+})
+
+document.getElementById('min-max-button').addEventListener('click', () => {
+  const currentWindow = remote.getCurrentWindow()
+  if(currentWindow.isMaximized()) {
+    currentWindow.unmaximize()
+  } else {
+    currentWindow.maximize()
+  }
+})
+
+document.getElementById('close-button').addEventListener('click', () => {
+  remote.app.quit()
+})
 
 
 
@@ -42,13 +66,13 @@ function getItems() {
 			if (fs.statSync(folder + '/' + file).isDirectory()) {
 				// dir
 				if (folder === 'C:/') {
-					$('#root').append('<a href="#" class="folder" onclick="$(\'#folder\').val(\''+ folder + file +'\'); getItems()">' + file + '</a>');
+					$('#root').append('<a href="#" class="folder" onclick="$(\'#folder\').val(\''+ folder + file +'\'); getItems()"><span>' + file + '</span></a>');
 				} else {
-					$('#root').append('<a href="#" class="folder" onclick="$(\'#folder\').val(\''+ folder + '/' + file +'\'); getItems()">' + file + '</a>');
+					$('#root').append('<a href="#" class="folder" onclick="$(\'#folder\').val(\''+ folder + '/' + file +'\'); getItems()"><span>' + file + '</span></a>');
 				}
 			} else {
 				// open file
-				$('#root').append('<a href="#" onclick="openFile(\''+ folder + '/' + file +'\')">' + file + '</a>');
+				$('#root').append('<a href="#" class="file" onclick="openFile(\''+ folder + '/' + file +'\')"><span>' + file + '</span></a>');
 			}
 		});
 	});
@@ -85,9 +109,9 @@ function getCurrentLocal() {
 
 	folder.forEach(function(value, key) {
 		if (key + 1 !== folder.length) {
-			$('#current').append(value + ' > ');
+			$('#current').append('<a href="">' + value + '</a>');
 		} else {
-			$('#current').append(value);
+			$('#current').append('<a href="">' + value + '</a>');
 		}
 	});
 }

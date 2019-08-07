@@ -1,5 +1,7 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const { app, BrowserWindow, ipcMain, Menu } = require('electron')
+const { template } = require('./app-menu-template')
+
 const path = require('path')
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -9,9 +11,12 @@ let mainWindow
 function createWindow () {
 	// Create the browser window.
 	mainWindow = new BrowserWindow({
-		width: 1200,
+		width: 1360,
 		height: 800,
+		minWidth: 1024,
+		minHeight: 500,
 		frame: false,
+		//transparent: true,
 		webPreferences: {
 			preload: path.join(__dirname, 'preload.js'),
 			nodeIntegration: true
@@ -49,6 +54,13 @@ app.on('activate', function () {
 	// On macOS it's common to re-create a window in the app when the
 	// dock icon is clicked and there are no other windows open.
 	if (mainWindow === null) createWindow()
+})
+
+ipcMain.on('display-app-menu', (event, arg) => {
+  const appMenu = Menu.buildFromTemplate(template)
+  if(mainWindow) {
+    appMenu.popup(mainWindow, arg.x, arg.y)
+  }
 })
 
 // In this file you can include the rest of your app's specific main process

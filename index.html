@@ -3,59 +3,50 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Finder</title>
-	<style>
-		body {
-			font-family: Roboto, sans-serif;
-		}
-
-		#root {
-			display: flex;
-			align-items: flex-start;
-			justify-content: flex-start;
-			flex-direction: row;
-			flex-wrap: wrap;
-		}
-
-		a {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			background: #1C1C1C;
-			color: #fff;
-			text-decoration: none;
-			width: 150px;
-			height: 150px;
-			margin: 10px;
-			border-radius: 8px;
-			transition: all .6s;
-		}
-
-		a:hover {
-			background: #000;
-			box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-			transition: all .6s;
-		}
-
-		a.folder {
-			background: #2379e5;
-		}
-
-		a.folder:hover {
-			background: #0d5dc0;
-		}
-	</style>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/title-bar.css">
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<h1 style="text-align: center">Finder</h1>
+	<div id="title-bar">
+		<div class="menu-button-container">
+			<button id="menu-button" class="menu-button"></button>
+		</div>
+		<div class="app-name-container">
+			<p>App Name</p>
+		</div>
+		<div class="window-controls-container">
+			<button id="minimize-button" class="minimize-button" title="Minimizar"></button>
+			<button id="min-max-button" class="min-max-button" title="Maximizar"></button>
+			<button id="close-button" class="close-button" title="Fechar"></button>
+		</div>
+	</div>
 
-	<button onclick="goBack()">Voltar</button>
-	<div id="current"></div>
-
-	<b>Arquivos:</b>
-	<div id="root"></div>
-
-	<input type="hidden" id="folder" name="folder" value=".">
-
+	<main>
+		<section id="sidebar">
+			<div class="group">
+				<a href="">Desktop</a>
+				<a href="">Documentos</a>
+				<a href="">Imagens</a>
+				<a href="">Músicas</a>
+				<a href="">Vídeos</a>
+			</div>
+		</section>
+		
+		<section id="content">
+			<header>
+				<button onclick="goBack()"></button>
+				<h1>Finder</h1>
+			</header>
+			
+			<div id="current"></div>
+			
+			<div id="root"></div>
+			
+			<input type="hidden" id="folder" name="folder" value=".">
+		</section>
+	</main>
+	
 	<script src="./renderer.js"></script>
 </body>
 </html>
