@@ -10,5 +10,5 @@ File Explorer para Windows usando ElectronJs e NodeJs
 - [ ] dark mode
 - [ ] Listar unidades de armazenamento
 - [ ] Buscar dentro das pastas
-- [ ] Terminal integrado?
+- [ ] Terminal integrado? [xterm.js](https://xtermjs.org/)
 - [ ] Integração Google Drive?
