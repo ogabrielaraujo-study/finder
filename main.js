@@ -1,6 +1,6 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, ipcMain, Menu } = require('electron')
-const { template } = require('./app-menu-template')
+const { template } = require('./src/app-menu-template')
 
 const path = require('path')
 
@@ -18,7 +18,7 @@ function createWindow () {
 		frame: false,
 		//transparent: true,
 		webPreferences: {
-			preload: path.join(__dirname, 'preload.js'),
+			preload: path.join(__dirname, 'src/preload.js'),
 			nodeIntegration: true
 		}
 	})

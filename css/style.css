@@ -4,6 +4,12 @@
 	outline: none;
 }
 
+html {
+	height: 100%;
+	max-height: 100%;
+	overflow: hidden;
+}
+
 body {
 	height: 100%;
 }
@@ -29,20 +35,44 @@ main {
 	border: 1px solid #ccc; */
 }
 
+/* icons */
+.icon {
+	width: 24px;
+	height: 24px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 25px;
+	background-repeat: no-repeat;
+	background-color: transparent;
+	background-position: center;
+}
+
+.icon.icon-star { background: url('../icons/star.svg'); }
+.icon.icon-computer { background: transparent url('../icons/computer.svg'); }
+.icon.icon-download { background: transparent url('../icons/download.svg'); }
+.icon.icon-folder { background: transparent url('../icons/folder.svg'); }
+.icon.icon-house { background: transparent url('../icons/house.svg'); }
+.icon.icon-trash { background: transparent url('../icons/trash.svg'); }
+.icon.icon-plus { background: transparent url('../icons/plus.svg'); }
+
 #sidebar {
+	position: relative;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 	width: 100%;
 	max-width: 300px;
 	height: 100%;
-	background: transparent;
-	padding-top: 50px;
+	background: #F7F8FC;
+	padding-top: 80px;
 	border-right: 1px solid #eee;
-	/* box-shadow: inset -14px -14px 35px rgba(0, 0, 0, 0.1); */
 }
 
 #sidebar .group {
 	display: flex;
 	flex-direction: column;
-	padding-left: 40px;
+	margin-bottom: 40px;
+	width: 100%;
 }
 
 #sidebar .group span {
@@ -52,11 +82,29 @@ main {
 }
 
 #sidebar .group a {
+	position: relative;
 	text-decoration: none;
 	color: #1F2E42;
 	font-weight: 600;
 	line-height: 40px;
 	font-size: 15px;
+	margin-bottom: 7px;
+	padding-left: 50px;
+}
+
+#sidebar .group a.active {
+	color: #00C4FF;
+}
+
+#sidebar .group a.active:before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	height: 38px;
+	width: 4px;
+	background: #00C4FF;
 }
 
 #content {
@@ -65,12 +113,14 @@ main {
 	flex-direction: column;
 	height: 100%;
 	padding: 40px;
+	width: calc(100% - 300px);
 }
 
 #content header {
 	display: flex;
 	align-items: center;
-	margin-bottom: 50px;
+	margin-bottom: 30px;
+	width: 100%;
 }
 
 #content header button {
@@ -98,7 +148,7 @@ main {
 	margin: 0 0 0 30px;
 }
 
-#content #current {
+#content #breadcrumb {
 	font-size: 16px;
 	font-weight: 300;
 	letter-spacing: 0.2px;
@@ -110,7 +160,7 @@ main {
 	padding: 0;
 }
 
-#content #current a {
+#content #breadcrumb a {
 	position: relative;
 	padding-right: 25px;
 	margin-right: 10px;
@@ -119,12 +169,12 @@ main {
 	transition: all .5s;
 }
 
-#content #current a:hover {
+#content #breadcrumb a:hover {
 	background: #00C4FF;
 	transition: all .5s;
 }
 
-#content #current a:after {
+#content #breadcrumb a:after {
 	content: "";
 	position: absolute;
 	background: url('../images/right-arrow.svg') no-repeat;
@@ -134,8 +184,12 @@ main {
 	height: 15px;
 }
 
-#content #current a:last-child::after {
+#content #breadcrumb a:last-child::after {
 	display: none;
+}
+
+#content #root {
+	width: 100%;
 }
 
 #content #root a {
@@ -181,7 +235,7 @@ main {
 	transition: all .5s;
 }
 
-#content #root a.folder:after {
+#content #root a[dir]:after {
 	background: #FFC067;
 }
 
@@ -189,4 +243,41 @@ main {
 	right: 0;
 	width: 100%;
 	transition: all .5s;
+}
+
+#content #files .file[format=png]:before,
+#content #files .file[format=jpg]:before,
+#content #files .file[format=jpeg]:before {
+	content: "";
+	position: absolute;
+	top: 0; right: 0; left: 0; bottom: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#add {
+	position: absolute;
+	right: -30px;
+	top: 37px;
+	width: 60px;
+	height: 60px;
+	border: none;
+	border-radius: 50%;
+	background: #00C4FF;
+	color: #fff;
+	cursor: pointer;
+	box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+	transition: all .5s;
+}
+
+#add:hover {
+	box-shadow: 0 5px 18px rgba(0, 0, 0, 0.3);
+	transition: all .5s;
+}
+
+#add .icon {
+	width: 20px;
+	height: 20px;
+	margin: 0;
+	filter: brightness(0) invert(1);
 }

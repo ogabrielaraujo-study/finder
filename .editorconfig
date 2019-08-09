@@ -16,6 +16,12 @@ charset = utf-8
 indent_style = tab
 indent_size = 4
 
+# js files
+[*.css]
+charset = utf-8
+indent_style = tab
+indent_size = 4
+
 # php files
 [*.php]
 charset = utf-8
